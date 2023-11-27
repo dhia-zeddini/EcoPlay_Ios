@@ -8,13 +8,21 @@
 import SwiftUI
 
 struct LoginView: View {
-    @State private var phone = ""
-    @State private var password = ""
+   
+    
     @State private var showForgetPwdView: Bool = false
     @State private var showResetView: Bool = false
     @State private var showOtpView: Bool = false
     @State private var isLoggedIn = false
     @Binding var showSignup: Bool
+    @State private var errorMessage: String = ""
+    @State private var showingAlert = false
+    @ObservedObject var viewModel: LoginViewModel
+
+    init(viewModel: LoginViewModel, showSignup: Binding<Bool>) {
+         self.viewModel = viewModel
+         self._showSignup = showSignup
+     }
     var body: some View {
         ZStack {
             Image("eco_play_background") 
@@ -22,8 +30,8 @@ struct LoginView: View {
                 .edgesIgnoringSafeArea(.all)
             VStack {
                 Image("clipart") .padding(.bottom, 40)
-              CustomTF(sfIcon: "phone", hint: "Phone Number ", value: $phone).padding(.horizontal, 40)
-                CustomTF(sfIcon: "lock", hint: "Password ",isPassword: true, value: $password).padding(.horizontal, 40).padding(.top, 20)
+                CustomTF(sfIcon: "phone", hint: "Phone Number ", value: $viewModel.data).padding(.horizontal, 40)
+                CustomTF(sfIcon: "lock", hint: "Password ",isPassword: true, value: $viewModel.password).padding(.horizontal, 40).padding(.top, 20)
                 
                 HStack {
                     Spacer() // This will push the button to the right
@@ -37,9 +45,10 @@ struct LoginView: View {
                 .padding(.top, 5)
                 
                 Button("Login") {
+                    
                     performLogin()
                 }
-                .dissableWithOpacity(phone.isEmpty||password.isEmpty)
+                //.dissableWithOpacity(phone.isEmpty||password.isEmpty)
                 .fontWeight(.bold)
                 .frame(maxWidth: 170)
                 .frame(maxHeight: 40)
@@ -53,6 +62,14 @@ struct LoginView: View {
                 NavigationLink(destination: ProfileView(), isActive: $isLoggedIn) {
                                    EmptyView()
                                }
+                
+                .alert(isPresented: $showingAlert) {
+                           Alert(
+                               title: Text("Error"),
+                               message: Text(errorMessage),
+                               dismissButton: .default(Text("OK"))
+                           )
+                       }
                 HStack {
                     Text("Or Sign up With")
                         .foregroundColor(.black)
@@ -122,10 +139,17 @@ struct LoginView: View {
     }
     
     private func performLogin() {
-         // Your login logic here...
-         // If login is successful:
-         isLoggedIn = true
-     }
+        viewModel.login()
+        print("Login failed: \(viewModel.errorMessage)")
+//        if let errorMessage = viewModel.errorMessage, !errorMessage.isEmpty {
+//            self.errorMessage = errorMessage
+//            showingAlert = true
+//            print("Login failed: \(errorMessage)")
+//        } else {
+//            //isLoggedIn = true
+//        }
+    }
+
 }
 struct LoginView_Previews: PreviewProvider {
     static var previews: some View {

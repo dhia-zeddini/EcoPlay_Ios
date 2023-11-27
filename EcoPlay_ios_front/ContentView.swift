@@ -10,9 +10,11 @@ import CoreData
 
 struct ContentView: View {
     @State private var showSignup: Bool = false
+    @ObservedObject var viewModel: LoginViewModel = LoginViewModel()
+
     var body: some View{
         NavigationStack{
-            LoginView(showSignup: $showSignup).navigationDestination(isPresented: $showSignup){
+            LoginView(viewModel: viewModel,showSignup: $showSignup).navigationDestination(isPresented: $showSignup){
                 RegisterView(showSignup: $showSignup)
             }
        
