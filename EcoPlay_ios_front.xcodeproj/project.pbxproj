@@ -7,15 +7,30 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7E6452C22B13FCCD00D6945B /* ForgetPwdView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E6452C12B13FCCD00D6945B /* ForgetPwdView.swift */; };
+		7E6452C42B14111D00D6945B /* ResetPwdView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E6452C32B14111D00D6945B /* ResetPwdView.swift */; };
+		7E6452C62B1417C100D6945B /* OTPView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E6452C52B1417C100D6945B /* OTPView.swift */; };
+		7E6452C82B14EEDE00D6945B /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E6452C72B14EEDE00D6945B /* ProfileView.swift */; };
+		7E6452CA2B14F6B500D6945B /* AccountPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E6452C92B14F6B500D6945B /* AccountPage.swift */; };
+		7E6452CC2B14F70400D6945B /* AchievementsPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E6452CB2B14F70400D6945B /* AchievementsPage.swift */; };
 		7EB4C1062B124C4700105DF4 /* EcoPlay_ios_frontApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EB4C1052B124C4700105DF4 /* EcoPlay_ios_frontApp.swift */; };
 		7EB4C1082B124C4700105DF4 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EB4C1072B124C4700105DF4 /* ContentView.swift */; };
 		7EB4C10A2B124C4900105DF4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7EB4C1092B124C4900105DF4 /* Assets.xcassets */; };
 		7EB4C10D2B124C4900105DF4 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7EB4C10C2B124C4900105DF4 /* Preview Assets.xcassets */; };
 		7EB4C10F2B124C4900105DF4 /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EB4C10E2B124C4900105DF4 /* Persistence.swift */; };
 		7EB4C1122B124C4900105DF4 /* EcoPlay_ios_front.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 7EB4C1102B124C4900105DF4 /* EcoPlay_ios_front.xcdatamodeld */; };
+		7EB4C11C2B139EFE00105DF4 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EB4C11B2B139EFE00105DF4 /* LoginView.swift */; };
+		7EB4C11F2B13B51200105DF4 /* CustomTF.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EB4C11E2B13B51200105DF4 /* CustomTF.swift */; };
+		7EB4C1212B13D22D00105DF4 /* RegisterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EB4C1202B13D22D00105DF4 /* RegisterView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		7E6452C12B13FCCD00D6945B /* ForgetPwdView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgetPwdView.swift; sourceTree = "<group>"; };
+		7E6452C32B14111D00D6945B /* ResetPwdView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResetPwdView.swift; sourceTree = "<group>"; };
+		7E6452C52B1417C100D6945B /* OTPView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OTPView.swift; sourceTree = "<group>"; };
+		7E6452C72B14EEDE00D6945B /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
+		7E6452C92B14F6B500D6945B /* AccountPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountPage.swift; sourceTree = "<group>"; };
+		7E6452CB2B14F70400D6945B /* AchievementsPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AchievementsPage.swift; sourceTree = "<group>"; };
 		7EB4C1022B124C4700105DF4 /* EcoPlay_ios_front.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EcoPlay_ios_front.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7EB4C1052B124C4700105DF4 /* EcoPlay_ios_frontApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EcoPlay_ios_frontApp.swift; sourceTree = "<group>"; };
 		7EB4C1072B124C4700105DF4 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -23,6 +38,9 @@
 		7EB4C10C2B124C4900105DF4 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		7EB4C10E2B124C4900105DF4 /* Persistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
 		7EB4C1112B124C4900105DF4 /* EcoPlay_ios_front.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = EcoPlay_ios_front.xcdatamodel; sourceTree = "<group>"; };
+		7EB4C11B2B139EFE00105DF4 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
+		7EB4C11E2B13B51200105DF4 /* CustomTF.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTF.swift; sourceTree = "<group>"; };
+		7EB4C1202B13D22D00105DF4 /* RegisterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -55,6 +73,8 @@
 		7EB4C1042B124C4700105DF4 /* EcoPlay_ios_front */ = {
 			isa = PBXGroup;
 			children = (
+				7EB4C11D2B13B47F00105DF4 /* Helpers */,
+				7EB4C11A2B139E2A00105DF4 /* View */,
 				7EB4C1052B124C4700105DF4 /* EcoPlay_ios_frontApp.swift */,
 				7EB4C1072B124C4700105DF4 /* ContentView.swift */,
 				7EB4C1092B124C4900105DF4 /* Assets.xcassets */,
@@ -71,6 +91,29 @@
 				7EB4C10C2B124C4900105DF4 /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		7EB4C11A2B139E2A00105DF4 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				7EB4C11B2B139EFE00105DF4 /* LoginView.swift */,
+				7EB4C1202B13D22D00105DF4 /* RegisterView.swift */,
+				7E6452C12B13FCCD00D6945B /* ForgetPwdView.swift */,
+				7E6452C32B14111D00D6945B /* ResetPwdView.swift */,
+				7E6452C52B1417C100D6945B /* OTPView.swift */,
+				7E6452C72B14EEDE00D6945B /* ProfileView.swift */,
+				7E6452C92B14F6B500D6945B /* AccountPage.swift */,
+				7E6452CB2B14F70400D6945B /* AchievementsPage.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		7EB4C11D2B13B47F00105DF4 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				7EB4C11E2B13B51200105DF4 /* CustomTF.swift */,
+			);
+			path = Helpers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -145,7 +188,16 @@
 			files = (
 				7EB4C10F2B124C4900105DF4 /* Persistence.swift in Sources */,
 				7EB4C1122B124C4900105DF4 /* EcoPlay_ios_front.xcdatamodeld in Sources */,
+				7E6452CA2B14F6B500D6945B /* AccountPage.swift in Sources */,
+				7E6452C42B14111D00D6945B /* ResetPwdView.swift in Sources */,
+				7EB4C11F2B13B51200105DF4 /* CustomTF.swift in Sources */,
+				7E6452C22B13FCCD00D6945B /* ForgetPwdView.swift in Sources */,
+				7EB4C1212B13D22D00105DF4 /* RegisterView.swift in Sources */,
+				7E6452C62B1417C100D6945B /* OTPView.swift in Sources */,
 				7EB4C1082B124C4700105DF4 /* ContentView.swift in Sources */,
+				7EB4C11C2B139EFE00105DF4 /* LoginView.swift in Sources */,
+				7E6452CC2B14F70400D6945B /* AchievementsPage.swift in Sources */,
+				7E6452C82B14EEDE00D6945B /* ProfileView.swift in Sources */,
 				7EB4C1062B124C4700105DF4 /* EcoPlay_ios_frontApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
