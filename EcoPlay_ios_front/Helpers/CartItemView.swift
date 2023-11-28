@@ -16,7 +16,7 @@ struct CartItemView: View {
                 .cornerRadius(10)
                 .overlay(
                     RoundedRectangle(cornerRadius: 10)
-                        .stroke(Color.green, lineWidth: 2)
+                        .stroke(Color.green)
                 )
 
             // Right side - Name and Price
@@ -32,7 +32,6 @@ struct CartItemView: View {
                     .foregroundColor(.gray)
             }
         }
-        .frame(width: 250) // Adjust the width of the entire CartItemView
         .padding(16)
         .background(Color.white)
         .cornerRadius(12)
