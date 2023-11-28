@@ -10,48 +10,45 @@ import Foundation
 import Combine
 
 class LoginViewModel: ObservableObject {
-    @Published var data = ""
-    @Published var password = ""
-    @Published var isLoading = false
-    @Published var errorMessage: String? = nil
+        @Published var data = ""
+        @Published var password = ""
+        @Published var isLoggedIn = false
+        @Published var showingAlert = false
+        @Published var errorMessage = ""
 
-    private var cancellables: Set<AnyCancellable> = []
+        private var cancellables: Set<AnyCancellable> = []
+        private let apiService = UserService()
 
-    func login() {
-        isLoading = true
+    
+    func loginUser() {
+         let userCredentials = UserCredentials(data: data, password: password)
 
-        let credentials = UserCredentials(data: data, password: password)
-        UserService.login(credentials)
-            .receive(on: DispatchQueue.main)
-            .sink(
-                receiveCompletion: { completion in
-                    switch completion {
-                    case .finished:
-                        break
-                    case .failure(let error):
-                        self.isLoading = false
-                        self.errorMessage = error.localizedDescription
-                        print("Login failed: \(error.localizedDescription)")
-                    }
-                },
-                receiveValue: { response in
-                    self.isLoading = false
-                    self.errorMessage = response.error.isEmpty ? nil : response.error
-                    // Handle successful login, e.g., store the token in a secure place
-                    if response.status {
-                        print("Login successful. Token: \(response.token)")
-                    }
-                }
-            )
-            .store(in: &cancellables)
-    }
-
-
+         apiService.login(userCredentials)
+             .receive(on: DispatchQueue.main)
+             .sink(receiveCompletion: { completion in
+                 switch completion {
+                 case .failure(let error):
+                     self.errorMessage = error.localizedDescription
+                     self.showingAlert = true
+                 case .finished:
+                     break
+                 }
+             }, receiveValue: { loginResponse in
+                 if loginResponse.status {
+                               self.isLoggedIn = true
+                           } else {
+                               self.errorMessage = loginResponse.error
+                               self.showingAlert = true
+                           }
+             })
+             .store(in: &cancellables)
+     }
+ 
 
     func reset() {
         data = ""
         password = ""
-        isLoading = false
-        errorMessage = nil
+        showingAlert = false
+        errorMessage = ""
     }
 }

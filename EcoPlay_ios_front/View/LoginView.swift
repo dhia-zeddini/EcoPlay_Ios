@@ -46,9 +46,10 @@ struct LoginView: View {
                 
                 Button("Login") {
                     
-                    performLogin()
+                    viewModel.loginUser()
+                  
                 }
-                //.dissableWithOpacity(phone.isEmpty||password.isEmpty)
+               
                 .fontWeight(.bold)
                 .frame(maxWidth: 170)
                 .frame(maxHeight: 40)
@@ -58,18 +59,20 @@ struct LoginView: View {
                 .cornerRadius(70)
                 .padding(.horizontal, 40)
                 .padding(.top, 20)
-                
-                NavigationLink(destination: ProfileView(), isActive: $isLoggedIn) {
-                                   EmptyView()
-                               }
-                
-                .alert(isPresented: $showingAlert) {
-                           Alert(
-                               title: Text("Error"),
-                               message: Text(errorMessage),
-                               dismissButton: .default(Text("OK"))
-                           )
-                       }
+                .disabled(viewModel.data.isEmpty || viewModel.password.isEmpty)
+                .opacity((viewModel.data.isEmpty || viewModel.password.isEmpty) ? 0.6 : 1)
+                NavigationLink(destination: ProfileView(), isActive: $viewModel.isLoggedIn) {
+                         EmptyView()
+                     }
+                     .isDetailLink(false)  // Add this line to prevent issues with NavigationLink inside a sheet
+
+                     .alert(isPresented: $viewModel.showingAlert) {
+                         Alert(
+                             title: Text("Error"),
+                             message: Text(viewModel.errorMessage),
+                             dismissButton: .default(Text("OK"))
+                         )
+                     }
                 HStack {
                     Text("Or Sign up With")
                         .foregroundColor(.black)
@@ -138,17 +141,7 @@ struct LoginView: View {
         })
     }
     
-    private func performLogin() {
-        viewModel.login()
-        print("Login failed: \(viewModel.errorMessage)")
-//        if let errorMessage = viewModel.errorMessage, !errorMessage.isEmpty {
-//            self.errorMessage = errorMessage
-//            showingAlert = true
-//            print("Login failed: \(errorMessage)")
-//        } else {
-//            //isLoggedIn = true
-//        }
-    }
+
 
 }
 struct LoginView_Previews: PreviewProvider {

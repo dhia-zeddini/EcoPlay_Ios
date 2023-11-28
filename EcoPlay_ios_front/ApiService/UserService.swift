@@ -10,7 +10,7 @@ import Foundation
 import Combine
 
 struct UserService {
-    static func login(_ credentials: UserCredentials) -> AnyPublisher<LoginResponse, Error> {
+     func login(_ credentials: UserCredentials) -> AnyPublisher<LoginResponse, Error> {
         let url = URL(string: "https://ecoplay-api.onrender.com/login")!
         
         var request = URLRequest(url: url)
