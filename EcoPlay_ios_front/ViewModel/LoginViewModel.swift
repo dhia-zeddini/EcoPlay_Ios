@@ -15,6 +15,7 @@ class LoginViewModel: ObservableObject {
         @Published var isLoggedIn = false
         @Published var showingAlert = false
         @Published var errorMessage = ""
+        @Published var userToken: String = ""
 
         private var cancellables: Set<AnyCancellable> = []
         private let apiService = UserService()
@@ -36,6 +37,8 @@ class LoginViewModel: ObservableObject {
              }, receiveValue: { loginResponse in
                  if loginResponse.status {
                                self.isLoggedIn = true
+                               self.userToken = loginResponse.token
+                               UserDefaults.standard.set(loginResponse.token, forKey: "token")
                            } else {
                                self.errorMessage = loginResponse.error
                                self.showingAlert = true

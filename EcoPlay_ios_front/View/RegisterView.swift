@@ -8,9 +8,15 @@
 import SwiftUI
 
 struct RegisterView: View {
-    @State private var phone = ""
-    @State private var password = ""
+  
     @Binding var showSignup: Bool
+    @ObservedObject var viewModel: RegisterViewModel
+    @ObservedObject var loginViewModel: LoginViewModel = LoginViewModel()
+
+    init(viewModel: RegisterViewModel, showSignup: Binding<Bool>) {
+         self.viewModel = viewModel
+         self._showSignup = showSignup
+     }
     var body: some View {
         ZStack {
            
@@ -29,22 +35,24 @@ struct RegisterView: View {
                     
                 
                 HStack{
-                    CustomTF(sfIcon: "person.fill", hint: "First Name ", value: $phone)
-                    CustomTF(sfIcon: "person.fill", hint: "Last Name ", value: $phone)
+                    CustomTF(sfIcon: "person.fill", hint: "First Name ", value: $viewModel.firstName)
+                    CustomTF(sfIcon: "person.fill", hint: "Last Name ", value: $viewModel.lastName)
                     
                 }.padding(.horizontal, 40)
                     .padding(.top,30)
-                CustomTF(sfIcon: "envelope.fill", hint: "Email ", value: $phone).padding(.horizontal, 40).padding(.top, 20)
-                CustomTF(sfIcon: "phone.fill", hint: "Phone Number ", value: $phone).padding(.horizontal, 40).padding(.top, 20)
-                CustomTF(sfIcon: "lock.fill", hint: "Password ",isPassword: true, value: $password).padding(.horizontal, 40).padding(.top, 20)
-                CustomTF(sfIcon: "lock.fill", hint: "Confirm Password ",isPassword: true, value: $password).padding(.horizontal, 40).padding(.top, 20)
+                CustomTF(sfIcon: "envelope.fill", hint: "Email ", value: $viewModel.email).padding(.horizontal, 40).padding(.top, 20)
+                CustomTF(sfIcon: "phone.fill", hint: "Phone Number ", value: $viewModel.phoneNumber).padding(.horizontal, 40).padding(.top, 20)
+                CustomTF(sfIcon: "lock.fill", hint: "Password ",isPassword: true, value: $viewModel.password).padding(.horizontal, 40).padding(.top, 20)
+                CustomTF(sfIcon: "lock.fill", hint: "Confirm Password ",isPassword: true, value: $viewModel.confirmPassword).padding(.horizontal, 40).padding(.top, 20)
                 
               
                 
                 Button("Register") {
-                    // Login action
+                    viewModel.registerUser()
+                    
+                    print(viewModel.showSignup)
                 }
-                .disabled(phone.isEmpty||password.isEmpty)
+                
                 .fontWeight(.bold)
                 .frame(maxWidth: 170)
                 .frame(maxHeight: 40)
@@ -54,8 +62,17 @@ struct RegisterView: View {
                 .cornerRadius(70)
                 .padding(.horizontal, 40)
                 .padding(.top, 20)
-                
-                
+                NavigationLink(destination: LoginView(viewModel: loginViewModel, showSignup: $viewModel.showSignup), isActive: $viewModel.showSignIn) {
+                    
+                         EmptyView()
+                     }
+                .alert(isPresented: $viewModel.showingAlert) {
+                    Alert(
+                        title: Text("Error"),
+                        message: Text(viewModel.errorMessage),
+                        dismissButton: .default(Text("OK"))
+                    )
+                }
               
                 
                 Spacer()
@@ -72,7 +89,6 @@ struct RegisterView: View {
             }
             .padding(.top, 100)
         }
-        //.padding(.top, 1)
     }
 }
 

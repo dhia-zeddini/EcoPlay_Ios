@@ -10,13 +10,19 @@ import CoreData
 
 struct ContentView: View {
     @State private var showSignup: Bool = false
-    @ObservedObject var viewModel: LoginViewModel = LoginViewModel()
+    @ObservedObject var loginViewModel: LoginViewModel = LoginViewModel()
+    @ObservedObject var registerViewModel: RegisterViewModel = RegisterViewModel()
 
     var body: some View{
         NavigationStack{
-            LoginView(viewModel: viewModel,showSignup: $showSignup).navigationDestination(isPresented: $showSignup){
-                RegisterView(showSignup: $showSignup)
-            }
+            if showSignup {
+                        RegisterView(viewModel: registerViewModel, showSignup: $showSignup)
+                            .navigationDestination(isPresented: $registerViewModel.showSignup) {
+                                LoginView(viewModel: loginViewModel, showSignup: $showSignup)
+                            }
+                    } else {
+                        LoginView(viewModel: loginViewModel, showSignup: $showSignup)
+                    }
        
         }
       

@@ -14,6 +14,8 @@ struct LoginResponse: Decodable {
     let error: String
 }
 
+
+
 struct UserCredentials : Encodable{
     let data: String
     let password: String
