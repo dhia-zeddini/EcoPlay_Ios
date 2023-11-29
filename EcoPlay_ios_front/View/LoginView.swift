@@ -18,6 +18,7 @@ struct LoginView: View {
     @State private var errorMessage: String = ""
     @State private var showingAlert = false
     @ObservedObject var viewModel: LoginViewModel
+    @ObservedObject var forgetPwdViewModel: ForgetPwdViewModel = ForgetPwdViewModel()
 
     init(viewModel: LoginViewModel, showSignup: Binding<Bool>) {
          self.viewModel = viewModel
@@ -125,7 +126,7 @@ struct LoginView: View {
         }
         //.padding(.top, 1)
         .sheet(isPresented: $showForgetPwdView, content: {
-            ForgetPwdView(showOtpView: $showOtpView)
+            ForgetPwdView(showOtpView: $showOtpView, viewModel: forgetPwdViewModel)
                 .presentationDetents([.height(400)])
                 .presentationCornerRadius(30)
         })

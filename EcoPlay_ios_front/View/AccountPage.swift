@@ -67,9 +67,9 @@ struct AccountPage: View {
                         Button(action: {
                             if let userToken = UserDefaults.standard.string(forKey: "token") {
                                 profileViewModel.updateAccountUser(userToken: userToken)
-                                isEdit = false
+                                
 
-                                print("token profile \(userToken)")
+                                print("message profile \(profileViewModel.errorMessage)")
                             }
                             
                         }) {
@@ -78,6 +78,17 @@ struct AccountPage: View {
                                 .padding(.horizontal, 20)
                                 .frame(height: 42)
                                 .padding(.top, 40)
+                        } .alert(isPresented: $profileViewModel.showingAlert) {
+                            Alert(
+                                title: Text("Alert"),
+                                message: Text(profileViewModel.errorMessage),
+                                dismissButton: .default(Text("OK"),
+                                                        action: {
+                                                            isEdit = false
+                                                            disabled = true
+                                                        }
+                                                       )
+                            )
                         }
                         
                     } else {
@@ -93,8 +104,8 @@ struct AccountPage: View {
                                 .padding(.top, 40)
                         }.alert(isPresented: $showAlert) {
                             Alert(
-                                title: Text("Unable to Save Workout Data"),
-                                message: Text("The connection to the server was lost."),
+                                title: Text("Edit Profile"),
+                                message: Text("Are you sure you want to edit your account?"),
                                 primaryButton: .default(
                                     Text("Yes"),
                                     action: {

@@ -13,6 +13,10 @@ struct LoginResponse: Decodable {
     let token: String
     let error: String
 }
+struct ForgetPwdResponse: Decodable {
+    let status: Bool
+    let token: String
+}
 
 
 

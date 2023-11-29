@@ -81,4 +81,20 @@ struct UserService {
            .decode(type: UpdateAccountResponse.self, decoder: JSONDecoder())
            .eraseToAnyPublisher()
    }
+    
+    func forgetPwd(_ credentials: UserCredentials) -> AnyPublisher<ForgetPwdResponse, Error> {
+       let url = URL(string: "https://ecoplay-api.onrender.com/forgetPwd")!
+       
+       var request = URLRequest(url: url)
+       request.httpMethod = "POST"
+       request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+
+       let encoder = JSONEncoder()
+       request.httpBody = try? encoder.encode(credentials)
+
+       return URLSession.shared.dataTaskPublisher(for: request)
+           .map(\.data)
+           .decode(type: ForgetPwdResponse.self, decoder: JSONDecoder())
+           .eraseToAnyPublisher()
+   }
 }

@@ -9,7 +9,13 @@ import SwiftUI
 
 struct ForgetPwdView: View {
     @Binding var showOtpView: Bool
-    @State private var email = ""
+    @State private var showForgetPwdView: Bool = false
+    @State private var showResetView: Bool = false
+    @State private var isLoggedIn = false
+    @State private var errorMessage: String = ""
+    @State private var showingAlert = false
+    @ObservedObject var viewModel: ForgetPwdViewModel
+    
     @Environment(\.dismiss) private var dismiss
     var body: some View {
         ZStack {
@@ -33,17 +39,20 @@ struct ForgetPwdView: View {
                     .font(.title2)
                     .padding(.horizontal, 40)
                     .padding(.top, 20)
-              CustomTF(sfIcon: "envelope", hint: "Email ", value: $email).padding(.top, 50).padding(.horizontal, 40)
+                CustomTF(sfIcon: "envelope", hint: "Email ", value: $viewModel.data).padding(.top, 50).padding(.horizontal, 40)
 
                 Button("Send") {
                     // Login action
+                    viewModel.forgetPwd()
+                    print("forget: hh")
+
                     Task{
                         dismiss()
-                        try? await Task.sleep(for: .seconds(0))
+                        try? await Task.sleep(for: .seconds(2))
                         showOtpView = true
                     }
                 }
-                .dissableWithOpacity(email.isEmpty)
+                .dissableWithOpacity(viewModel.data.isEmpty)
                 .fontWeight(.bold)
                 .frame(maxWidth: 170)
                 .frame(maxHeight: 40)
@@ -53,7 +62,14 @@ struct ForgetPwdView: View {
                 .cornerRadius(70)
                 .padding(.horizontal, 40)
                 .padding(.top, 20)
-                
+                .alert(isPresented: $viewModel.showingAlert) {
+                    Alert(
+                        title: Text("Error"),
+                        message: Text(viewModel.errorMessage),
+                        dismissButton: .default(Text("OK"))
+                    )
+                }
+
                 
            
                 
