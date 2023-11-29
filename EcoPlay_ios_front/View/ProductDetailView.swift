@@ -1,13 +1,8 @@
-//
-//  ProductDetailView.swift
-//  EcoPlay_ios_front
-//
-//  Created by mansouri sabri on 27/11/2023.
-//
-
 import SwiftUI
 
 struct ProductDetailView: View {
+    var product: ProductModel
+
     var body: some View {
         VStack(alignment: .center, spacing: 20) {
             Text("Product Details")
@@ -16,13 +11,13 @@ struct ProductDetailView: View {
                 .foregroundColor(Color.black)
                 .padding([.top], 40.0)
 
-            Text("Gamer Kong")
+            Text(product.nameP)
                 .font(.headline)
                 .fontWeight(.bold)
                 .foregroundColor(Color.green)
                 .padding([.top, .trailing], 20.0)
 
-            Image("monkey")
+            Image(product.image)
                 .resizable()
                 .aspectRatio(contentMode: .fit)
                 .frame(width: 300, height: 300)
@@ -30,7 +25,7 @@ struct ProductDetailView: View {
                 .padding([.leading, .trailing], 20.0)
 
             VStack {
-                Text("Introducing the extraordinary kong  a whimsical companion ")
+                Text(product.descriptionP)
                     .font(.body)
                     .foregroundColor(Color.black)
                     .multilineTextAlignment(.center)
@@ -46,7 +41,7 @@ struct ProductDetailView: View {
                     )
             }
 
-            Text("Price: $" + String(format: "%.2f"))
+            Text("Price: $" + String(format: "%.2f", Double(product.priceP) ?? 0.0))
                 .font(.headline)
                 .fontWeight(.bold)
                 .foregroundColor(Color.green)
@@ -88,6 +83,10 @@ struct ProductDetailView: View {
 
 struct ProductDetailView_Previews: PreviewProvider {
     static var previews: some View {
-        ProductDetailView()
+        let sampleProduct = ProductModel(id: "1", nameP: "Sample Product", descriptionP: "Sample Description", priceP: "29.99", typeP: "Sample Type", image: "sample_image")
+        let viewModel = ProductDetailViewModel(product: sampleProduct)
+
+        return ProductDetailView(product: viewModel.product)
+            .environmentObject(viewModel)
     }
 }

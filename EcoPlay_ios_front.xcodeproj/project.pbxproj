@@ -22,6 +22,7 @@
 		E332122C2B16819300F0CB19 /* ProductModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E332122B2B16819300F0CB19 /* ProductModel.swift */; };
 		E33212302B16852200F0CB19 /* CarouselleViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E332122F2B16852200F0CB19 /* CarouselleViewModel.swift */; };
 		E33212332B16856300F0CB19 /* CarouselleService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E33212322B16856300F0CB19 /* CarouselleService.swift */; };
+		E33212392B17FB3400F0CB19 /* ProductDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E33212382B17FB3400F0CB19 /* ProductDetailViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -60,6 +61,7 @@
 		E332122B2B16819300F0CB19 /* ProductModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductModel.swift; sourceTree = "<group>"; };
 		E332122F2B16852200F0CB19 /* CarouselleViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarouselleViewModel.swift; sourceTree = "<group>"; };
 		E33212322B16856300F0CB19 /* CarouselleService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarouselleService.swift; sourceTree = "<group>"; };
+		E33212382B17FB3400F0CB19 /* ProductDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductDetailViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -179,6 +181,7 @@
 			isa = PBXGroup;
 			children = (
 				E332122F2B16852200F0CB19 /* CarouselleViewModel.swift */,
+				E33212382B17FB3400F0CB19 /* ProductDetailViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -326,6 +329,7 @@
 				E33212332B16856300F0CB19 /* CarouselleService.swift in Sources */,
 				E33212252B15546200F0CB19 /* ProductDetailView.swift in Sources */,
 				E33211F52B14E9F200F0CB19 /* ContentView.swift in Sources */,
+				E33212392B17FB3400F0CB19 /* ProductDetailViewModel.swift in Sources */,
 				E33212302B16852200F0CB19 /* CarouselleViewModel.swift in Sources */,
 				E33212272B1571B200F0CB19 /* CartItemView.swift in Sources */,
 				E33211F32B14E9F200F0CB19 /* EcoPlay_ios_frontApp.swift in Sources */,

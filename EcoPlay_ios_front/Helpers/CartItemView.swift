@@ -41,6 +41,7 @@ struct CartItemView: View {
         )
         .shadow(radius: 4)
     }
+        
 }
 
 struct CartItemView_Previews: PreviewProvider {

@@ -5,65 +5,83 @@ struct CarouselleView: View {
 
     init(carouselleViewModel: CarouselleViewModel = CarouselleViewModel()) {
         self.carouselleViewModel = carouselleViewModel
-        self.carouselleViewModel.fetchProducts() // Fetch products when the view is initialized
     }
 
     var body: some View {
-        ZStack {
-            VStack {
-                Text("Let's make your Account Special")
-                    .font(.headline)
-                    .fontWeight(.bold)
-                    .foregroundColor(Color.black)
-                    .multilineTextAlignment(.leading)
-                    .padding([.bottom, .trailing], 30.0)
-                    .frame(maxWidth: .infinity, alignment: .top)
+        NavigationView {
+            ZStack {
+                VStack {
+                    Text("Let's make your Account Special ...")
+                        .font(.title)
+                        .fontWeight(.bold)
+                        .foregroundColor(Color.green)
+                        .multilineTextAlignment(.leading)
+                        .padding([.bottom, .trailing], 30.0)
+                        .frame(maxWidth: .infinity, alignment: .top)
 
-                Text("Avatar Collection")
-                    .font(.subheadline)
-                    .fontWeight(.bold)
-                    .foregroundColor(Color.green)
-                    .multilineTextAlignment(.leading)
-                    .padding(.trailing, 150.0)
+                    // Decorated Frame for "Avatar Collection" Text
+                    ZStack {
+                        RoundedRectangle(cornerRadius: 15)
+                            .fill(Color.white)
+                            .frame(width: 300.0, height: 40)
+                            .shadow(radius: 2)
+                            .blur(radius: 1)
 
-                ScrollView(.horizontal, showsIndicators: false) {
-                    HStack(spacing: 20) {
-                        ForEach(carouselleViewModel.products) { product in
-                            CarouselleItemView(
-                                image: product.image,
-                                nameP: product.nameP,
-                                priceP: Double(product.priceP) ?? 0.0
+                        Text("Avatar Collection")
+                            .font(.title2)
+                            .fontWeight(.bold)
+                            .foregroundColor(Color.gray)
+                    }
 
-                            )
+                    ScrollView(.horizontal, showsIndicators: false) {
+                        HStack(spacing: 20) {
+                            ForEach(carouselleViewModel.products) { product in
+                                NavigationLink(destination: ProductDetailView(product: product)) {
+                                    CarouselleItemView(
+                                        image: product.image,
+                                        nameP: product.nameP,
+                                        descriptionP: product.descriptionP,
+                                        priceP: Double(product.priceP) ?? 0.0
+                                    )
+                                }
+                            }
+                        }
+                        .padding(.horizontal)
+                    }
+                    .padding(.vertical, 80.0)
+                }
+
+                Spacer()
+                    .padding(.top, 960.0)
+
+                VStack {
+                    Spacer()
+                    ZStack {
+                        Image("dodane")
+                            .resizable()
+                            .aspectRatio(contentMode: .fit)
+                            .frame(width: 395, height: 250)
+
+                        NavigationLink(destination: CartView()) {
+                            Text("Go To Cart")
+                                .font(.largeTitle)
+                                .fontWeight(.light)
+                                .foregroundColor(Color.black)
                         }
                     }
-                    .padding(.horizontal)
                 }
-                .padding(.vertical, 80.0)
             }
-
-            Spacer()
-                .padding(.top, 960.0)
-            VStack {
-                Spacer()
-                ZStack {
-                    Image("dodane")
-                        .resizable()
-                        .aspectRatio(contentMode: .fit)
-                        .frame(width: 395, height: 250)
-
-                    Text("Check Your Cart")
-                        .font(.body)
-                        .fontWeight(.bold)
-                }
+            .background(
+                Image("ecoPlay_bachground")
+                    .resizable()
+                    .scaledToFill()
+                    .edgesIgnoringSafeArea(.all)
+            )
+            .navigationBarHidden(true)
+            .onAppear {
+                self.carouselleViewModel.fetchProducts()
             }
         }
-        .background(
-            Image("ecoPlay_bachground")
-                .resizable()
-                .scaledToFill()
-                .edgesIgnoringSafeArea(.all)
-        )
     }
 }
 
