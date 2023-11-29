@@ -26,4 +26,9 @@ struct UserModel: Codable {
     let createdAt: String
     let updatedAt: String
     let __v: Int
+    
+    
+    enum CodingKeys: String, CodingKey {
+           case _id, firstName, lastName, email, phoneNumber, password, avatar, points, score, level, goldMedal, silverMedal, bronzeMedal, owned, etatDelete, createdAt, updatedAt, __v
+       }
 }

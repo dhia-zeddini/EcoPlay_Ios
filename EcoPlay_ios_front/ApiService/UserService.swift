@@ -42,4 +42,25 @@ struct UserService {
            .decode(type: RegisterResponse.self, decoder: JSONDecoder())
            .eraseToAnyPublisher()
    }
+    
+    
+        func getUserProfile(userToken: String) -> AnyPublisher<UserModel, Error> {
+            
+            let userProfileURL = URL(string: "https://ecoplay-api.onrender.com/user/profile")!
+
+            var request = URLRequest(url: userProfileURL)
+            request.httpMethod = "GET"
+            
+            request.setValue("Bearer \(userToken)", forHTTPHeaderField: "token")
+
+            return URLSession.shared.dataTaskPublisher(for: request)
+                .tryMap { data, response in
+                    guard let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == 200 else {
+                        throw URLError(.badServerResponse)
+                    }
+                    return try JSONDecoder().decode(UserModel.self, from: data)
+                }
+                .receive(on: DispatchQueue.main)
+                .eraseToAnyPublisher()
+        }
 }

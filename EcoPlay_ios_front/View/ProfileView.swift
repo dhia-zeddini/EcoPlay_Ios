@@ -9,6 +9,7 @@ import SwiftUI
 
 struct ProfileView: View {
     @State private var selectedTab = 0
+    @ObservedObject private var profileViewModel: ProfileViewModel = ProfileViewModel()
 
     var body: some View {
         ZStack{
@@ -37,7 +38,7 @@ struct ProfileView: View {
                     
                     // Tab View Content
                     TabView(selection: $selectedTab) {
-                        AccountPage()
+                        AccountPage(profileViewModel: profileViewModel)
                             .tag(0)
                         
                         AchievementsPage()

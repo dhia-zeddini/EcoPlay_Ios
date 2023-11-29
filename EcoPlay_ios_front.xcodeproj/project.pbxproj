@@ -19,6 +19,7 @@
 		7E6452D92B167B9100D6945B /* UserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E6452D82B167B9000D6945B /* UserModel.swift */; };
 		7E6452DB2B167C4200D6945B /* RegisterViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E6452DA2B167C4200D6945B /* RegisterViewModel.swift */; };
 		7E6452DD2B167CDC00D6945B /* RegisterModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E6452DC2B167CDC00D6945B /* RegisterModel.swift */; };
+		7E6452DF2B1695F600D6945B /* ProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E6452DE2B1695F600D6945B /* ProfileViewModel.swift */; };
 		7EB4C1062B124C4700105DF4 /* EcoPlay_ios_frontApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EB4C1052B124C4700105DF4 /* EcoPlay_ios_frontApp.swift */; };
 		7EB4C1082B124C4700105DF4 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EB4C1072B124C4700105DF4 /* ContentView.swift */; };
 		7EB4C10A2B124C4900105DF4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7EB4C1092B124C4900105DF4 /* Assets.xcassets */; };
@@ -43,6 +44,7 @@
 		7E6452D82B167B9000D6945B /* UserModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserModel.swift; sourceTree = "<group>"; };
 		7E6452DA2B167C4200D6945B /* RegisterViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewModel.swift; sourceTree = "<group>"; };
 		7E6452DC2B167CDC00D6945B /* RegisterModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterModel.swift; sourceTree = "<group>"; };
+		7E6452DE2B1695F600D6945B /* ProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewModel.swift; sourceTree = "<group>"; };
 		7EB4C1022B124C4700105DF4 /* EcoPlay_ios_front.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EcoPlay_ios_front.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7EB4C1052B124C4700105DF4 /* EcoPlay_ios_frontApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EcoPlay_ios_frontApp.swift; sourceTree = "<group>"; };
 		7EB4C1072B124C4700105DF4 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -89,6 +91,7 @@
 			children = (
 				7E6452D62B1527FA00D6945B /* LoginViewModel.swift */,
 				7E6452DA2B167C4200D6945B /* RegisterViewModel.swift */,
+				7E6452DE2B1695F600D6945B /* ProfileViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -242,6 +245,7 @@
 				7E6452C62B1417C100D6945B /* OTPView.swift in Sources */,
 				7EB4C1082B124C4700105DF4 /* ContentView.swift in Sources */,
 				7EB4C11C2B139EFE00105DF4 /* LoginView.swift in Sources */,
+				7E6452DF2B1695F600D6945B /* ProfileViewModel.swift in Sources */,
 				7E6452DD2B167CDC00D6945B /* RegisterModel.swift in Sources */,
 				7E6452D22B15270800D6945B /* UserService.swift in Sources */,
 				7E6452CC2B14F70400D6945B /* AchievementsPage.swift in Sources */,
