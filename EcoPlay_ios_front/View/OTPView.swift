@@ -9,8 +9,11 @@ import SwiftUI
 
 struct OTPView: View {
     @Binding var showResetView: Bool
-    @State private var otpText: String = ""
     @FocusState private var isKeyBoardShowing: Bool
+    @State private var isLoggedIn = false
+    @State private var errorMessage: String = ""
+    @State private var showingAlert = false
+    @ObservedObject var viewModel: OTPViewModel
     @Environment(\.dismiss) private var dismiss
     var body: some View {
         ZStack {
@@ -44,7 +47,7 @@ struct OTPView: View {
                     }
                 }
                 .background(content: {
-                    TextField("",text: $otpText.limit(4))
+                    TextField("",text: $viewModel.otpText.limit(4))
                         .frame(width: 1,height: 1)
                         .opacity(0.001)
                         .blendMode(.screen)
@@ -56,7 +59,10 @@ struct OTPView: View {
                 }
 
                 Button("Send") {
-                    // Login action
+                    if let userToken = UserDefaults.standard.string(forKey: "token") {
+                        viewModel.otp(userToken: userToken)
+
+                    }
                     Task{
                         dismiss()
                         try? await Task.sleep(for: .seconds(0))
@@ -74,7 +80,13 @@ struct OTPView: View {
                 .padding(.horizontal, 40)
                 .padding(.top, 20)
                 
-                
+                .alert(isPresented: $viewModel.showingAlert) {
+                    Alert(
+                        title: Text("Error"),
+                        message: Text(viewModel.errorMessage),
+                        dismissButton: .default(Text("OK"))
+                    )
+                }
            
                 
            
@@ -88,10 +100,10 @@ struct OTPView: View {
     @ViewBuilder
     func OTPBox(_ index: Int)->some View{
         ZStack{
-            if otpText.count > index{
-                let startIndex = otpText.startIndex
-                let charIndex = otpText.index(startIndex,offsetBy: index)
-                let charToString = String(otpText[charIndex])
+            if viewModel.otpText.count > index{
+                let startIndex = viewModel.otpText.startIndex
+                let charIndex = viewModel.otpText.index(startIndex,offsetBy: index)
+                let charToString = String(viewModel.otpText[charIndex])
                 Text(charToString)
             }else{
                 Text(" ")

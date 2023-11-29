@@ -1,17 +1,15 @@
 //
-//  ForgetPwdViewModel.swift
+//  OTPViewModel.swift
 //  EcoPlay_ios_front
 //
 //  Created by Zeddin Dhia on 29/11/2023.
 //
 
 import Foundation
-
 import Combine
 
-class ForgetPwdViewModel: ObservableObject {
-        @Published var data = ""
-        @Published var password = ""
+class OTPViewModel: ObservableObject {
+        @Published var otpText = ""
         @Published var isLoggedIn = false
         @Published var showingAlert = false
         @Published var errorMessage = ""
@@ -21,10 +19,10 @@ class ForgetPwdViewModel: ObservableObject {
         private let apiService = UserService()
 
     
-    func forgetPwd() {
-         let userCredentials = UserCredentials(data: data, password: "")
+    func otp(userToken: String) {
+         let userCredentials = UserCredentials(data: otpText, password: "")
 
-         apiService.forgetPwd(userCredentials)
+         apiService.otp(userCredentials,userToken: userToken)
              .receive(on: DispatchQueue.main)
              .sink(receiveCompletion: { completion in
                  switch completion {
@@ -44,7 +42,7 @@ class ForgetPwdViewModel: ObservableObject {
                                 self.showOtpView = true
                      self.reset()
                            } else {
-                               //self.errorMessage = loginResponse.error
+                               self.errorMessage = loginResponse.token
                                self.showingAlert = true
                            }
              })
@@ -53,8 +51,7 @@ class ForgetPwdViewModel: ObservableObject {
  
 
     func reset() {
-        data = ""
-        password = ""
+        otpText = ""
         showingAlert = false
         errorMessage = ""
     }

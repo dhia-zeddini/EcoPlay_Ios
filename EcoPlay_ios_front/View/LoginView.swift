@@ -19,6 +19,7 @@ struct LoginView: View {
     @State private var showingAlert = false
     @ObservedObject var viewModel: LoginViewModel
     @ObservedObject var forgetPwdViewModel: ForgetPwdViewModel = ForgetPwdViewModel()
+    @ObservedObject var otpViewModel: OTPViewModel = OTPViewModel()
 
     init(viewModel: LoginViewModel, showSignup: Binding<Bool>) {
          self.viewModel = viewModel
@@ -131,7 +132,7 @@ struct LoginView: View {
                 .presentationCornerRadius(30)
         })
         .sheet(isPresented: $showOtpView, content: {
-            OTPView(showResetView: $showResetView )
+            OTPView(showResetView: $showResetView, viewModel: otpViewModel )
                 .presentationDetents([.height(400)])
                 .presentationCornerRadius(30)
         })

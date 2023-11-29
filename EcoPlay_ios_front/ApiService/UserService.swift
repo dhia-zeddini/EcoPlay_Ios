@@ -97,4 +97,20 @@ struct UserService {
            .decode(type: ForgetPwdResponse.self, decoder: JSONDecoder())
            .eraseToAnyPublisher()
    }
+    
+    func otp(_ credentials: UserCredentials,userToken: String) -> AnyPublisher<ForgetPwdResponse, Error> {
+       let url = URL(string: "http://localhost:9001/otp")!
+       
+       var request = URLRequest(url: url)
+       request.httpMethod = "POST"
+       request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+        request.setValue("Bearer \(userToken)", forHTTPHeaderField: "token")
+       let encoder = JSONEncoder()
+       request.httpBody = try? encoder.encode(credentials)
+
+       return URLSession.shared.dataTaskPublisher(for: request)
+           .map(\.data)
+           .decode(type: ForgetPwdResponse.self, decoder: JSONDecoder())
+           .eraseToAnyPublisher()
+   }
 }
