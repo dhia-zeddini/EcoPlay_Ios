@@ -15,6 +15,9 @@ class ProfileViewModel: ObservableObject {
     @Published  var email = ""
     @Published  var phoneNumber = ""
     
+    @Published var showingAlert = false
+    @Published var errorMessage = ""
+    
     @Published var userModel = UserModel(_id: "", firstName: "", lastName: "", email: "", phoneNumber: "", password: "", avatar: "", points: 0, score: 0, level: 0, goldMedal: 0, silverMedal: 0, bronzeMedal: 0, owned: [""], etatDelete: false, createdAt: "", updatedAt: "", __v: 0)
     @Published var isLoading = false
 
@@ -44,4 +47,39 @@ class ProfileViewModel: ObservableObject {
             })
             .store(in: &cancellables)
     }
+    
+    
+    func updateAccountUser(userToken: String) {
+      
+
+        let registerRequestModel = RegisterRequestModel(
+            firstName: firstName,
+            lastName: lastName,
+            email: email,
+            phoneNumber: phoneNumber,
+            password: "",
+            avatar: ""
+        )
+       
+        apiService.editAccount(registerRequestModel,userToken: userToken)
+          // .receive(on: DispatchQueue.main)
+           .sink(receiveCompletion: { completion in
+               switch completion {
+               case .failure(let error):
+                   self.errorMessage = error.localizedDescription
+                   self.showingAlert = true
+               case .finished:
+                   break
+               }
+           }, receiveValue: { UpdateAccountResponse in
+               
+               print("in status: \(UpdateAccountResponse.message)")
+              
+                   self.errorMessage = UpdateAccountResponse.message
+                   self.showingAlert = true
+
+           
+           })
+           .store(in: &cancellables)
+   }
 }

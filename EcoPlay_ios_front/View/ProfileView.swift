@@ -13,7 +13,7 @@ struct ProfileView: View {
 
     var body: some View {
         ZStack{
-         
+          
             NavigationView {
                 VStack {
                     Image("img5")

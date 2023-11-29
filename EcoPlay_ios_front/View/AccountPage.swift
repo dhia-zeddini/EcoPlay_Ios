@@ -3,6 +3,8 @@ import SwiftUI
 struct AccountPage: View {
     @ObservedObject  var profileViewModel: ProfileViewModel = ProfileViewModel()
     @State private var isEdit: Bool = false
+    @State private var disabled: Bool = true
+    @State private var showAlert: Bool = false
 
     var body: some View {
         ZStack {
@@ -11,7 +13,7 @@ struct AccountPage: View {
                 .edgesIgnoringSafeArea(.all)
             ScrollView {
                 VStack(alignment: .leading) {
-                    AccountDetails(profileViewModel: profileViewModel)
+                    AccountDetails(isEdit: $isEdit, disabled: $disabled, showAlert: $showAlert, profileViewModel: profileViewModel)
                     Settings()
                     Security()
                     Text("Delete Account")
@@ -35,7 +37,9 @@ struct AccountPage: View {
     }
     
     struct AccountDetails: View {
-       // @Binding var isEdit: Bool
+        @Binding var isEdit: Bool
+        @Binding var disabled: Bool
+        @Binding var showAlert: Bool
 //        @Binding var userModel : UserModel
 //        @State private var firstName = ""
 //        @State private var lastName = ""
@@ -59,9 +63,15 @@ struct AccountPage: View {
                         .frame(height: 42)
                         .padding(.top, 40)
                     
-//                    if isEdit {
+                    if isEdit {
                         Button(action: {
-//                            isEdit = false
+                            if let userToken = UserDefaults.standard.string(forKey: "token") {
+                                profileViewModel.updateAccountUser(userToken: userToken)
+                                isEdit = false
+
+                                print("token profile \(userToken)")
+                            }
+                            
                         }) {
                             Text("Done")
                                 .foregroundColor(Color(hex: "#03A9F4"))
@@ -69,28 +79,48 @@ struct AccountPage: View {
                                 .frame(height: 42)
                                 .padding(.top, 40)
                         }
-//                    } else {
-//                        Button(action: {
-//                            isEdit = true
-//                        }) {
-//                            Text("Edit")
-//                                .foregroundColor(Color(hex: "#03A9F4"))
-//                                .padding(.horizontal, 20)
-//                                .frame(height: 42)
-//                                .padding(.top, 40)
-//                        }
-//                    }
+                        
+                    } else {
+                        Button(action: {
+                           // isEdit = true
+                            showAlert = true
+                            
+                        }) {
+                            Text("Edit")
+                                .foregroundColor(Color(hex: "#03A9F4"))
+                                .padding(.horizontal, 20)
+                                .frame(height: 42)
+                                .padding(.top, 40)
+                        }.alert(isPresented: $showAlert) {
+                            Alert(
+                                title: Text("Unable to Save Workout Data"),
+                                message: Text("The connection to the server was lost."),
+                                primaryButton: .default(
+                                    Text("Yes"),
+                                    action: {
+                                        isEdit = true
+                                        disabled = false
+                                    }
+                                ),
+                                secondaryButton: .destructive(
+                                    Text("Cancel")
+                                    
+                                )
+                            )
+                        }
+                    }
                 }
                 
                 VStack {
-                    CustomTF(sfIcon: "person.fill", hint: "First Name", value:  $profileViewModel.firstName).padding(.top, 10)
-                    CustomTF(sfIcon: "person.fill", hint: "Last Name", value: $profileViewModel.lastName)
-                    CustomTF(sfIcon: "envelope.fill", hint: "Email", value: $profileViewModel.email)
-                    CustomTF(sfIcon: "phone.fill", hint: "Phone Number", value: $profileViewModel.phoneNumber).padding(.bottom, 20)
+                    CustomTF(sfIcon: "person.fill", hint: "First Name", value:  $profileViewModel.firstName).padding(.top, 10).disabled(disabled)
+                    CustomTF(sfIcon: "person.fill", hint: "Last Name", value: $profileViewModel.lastName).disabled(disabled)
+                    CustomTF(sfIcon: "envelope.fill", hint: "Email", value: $profileViewModel.email).disabled(disabled)
+                    CustomTF(sfIcon: "phone.fill", hint: "Phone Number", value: $profileViewModel.phoneNumber).padding(.bottom, 20).disabled(disabled)
                 }
                 .background(Color.white)
                 .cornerRadius(20)
                 .padding(.horizontal, 20)
+                .shadow(radius: 5)
             }
             
         }
@@ -134,6 +164,7 @@ struct AccountPage: View {
                 .background(Color.white)
                 .cornerRadius(20)
                 .padding(.horizontal, 20)
+                .shadow(radius: 5)
             }
         }
     }
@@ -177,6 +208,7 @@ struct AccountPage: View {
                 .cornerRadius(20)
                 .padding(.horizontal, 20)
                 .padding(.bottom, 10)
+                .shadow(radius: 5)
             }
         }
     }

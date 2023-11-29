@@ -63,4 +63,22 @@ struct UserService {
                 .receive(on: DispatchQueue.main)
                 .eraseToAnyPublisher()
         }
+    
+    
+    func editAccount(_ registerRequestModel: RegisterRequestModel,userToken: String) -> AnyPublisher<UpdateAccountResponse, Error> {
+       let url = URL(string: "https://ecoplay-api.onrender.com/user")!
+       
+       var request = URLRequest(url: url)
+       request.httpMethod = "PUT"
+       request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+        request.setValue("Bearer \(userToken)", forHTTPHeaderField: "token")
+
+       let encoder = JSONEncoder()
+       request.httpBody = try? encoder.encode(registerRequestModel)
+
+       return URLSession.shared.dataTaskPublisher(for: request)
+           .map(\.data)
+           .decode(type: UpdateAccountResponse.self, decoder: JSONDecoder())
+           .eraseToAnyPublisher()
+   }
 }

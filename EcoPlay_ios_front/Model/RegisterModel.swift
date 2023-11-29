@@ -21,3 +21,8 @@ struct RegisterResponse: Decodable {
     let success: String
     
 }
+
+struct UpdateAccountResponse: Decodable {
+    let message: String
+    
+}
