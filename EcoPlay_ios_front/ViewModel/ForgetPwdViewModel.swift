@@ -25,11 +25,11 @@ class ForgetPwdViewModel: ObservableObject {
          let userCredentials = UserCredentials(data: data, password: "")
 
          apiService.forgetPwd(userCredentials)
-             .receive(on: DispatchQueue.main)
+            .receive(on: DispatchQueue.main)
              .sink(receiveCompletion: { completion in
                  switch completion {
                  case .failure(let error):
-                     self.errorMessage = error.localizedDescription
+                     self.errorMessage = "User dose not exist"
                      print("forget: \(error.localizedDescription)")
                      self.showingAlert = true
                  case .finished:
@@ -38,13 +38,14 @@ class ForgetPwdViewModel: ObservableObject {
              }, receiveValue: { loginResponse in
                  print("forget: \(loginResponse)")
                  if loginResponse.status {
+                     self.reset()
                                self.isLoggedIn = true
                                self.userToken = loginResponse.token
                                UserDefaults.standard.set(loginResponse.token, forKey: "token")
                                 self.showOtpView = true
-                     self.reset()
+                     
                            } else {
-                               //self.errorMessage = loginResponse.error
+                               self.errorMessage = "User dose not exist"
                                self.showingAlert = true
                            }
              })

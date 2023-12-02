@@ -113,4 +113,21 @@ struct UserService {
            .decode(type: ForgetPwdResponse.self, decoder: JSONDecoder())
            .eraseToAnyPublisher()
    }
+    
+    func newPwd(_ credentials: UserCredentials,userToken: String) -> AnyPublisher<LoginResponse, Error> {
+       let url = URL(string: "https://ecoplay-api.onrender.com/newPwd")!
+       
+       var request = URLRequest(url: url)
+       request.httpMethod = "POST"
+       request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+        request.setValue("Bearer \(userToken)", forHTTPHeaderField: "token")
+
+       let encoder = JSONEncoder()
+       request.httpBody = try? encoder.encode(credentials)
+
+       return URLSession.shared.dataTaskPublisher(for: request)
+           .map(\.data)
+           .decode(type: LoginResponse.self, decoder: JSONDecoder())
+           .eraseToAnyPublisher()
+   }
 }

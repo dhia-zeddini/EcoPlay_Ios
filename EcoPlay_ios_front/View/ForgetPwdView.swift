@@ -47,9 +47,14 @@ struct ForgetPwdView: View {
                     print("forget: hh")
 
                     Task{
-                        dismiss()
-                        try? await Task.sleep(for: .seconds(2))
-                        showOtpView = true
+                        
+                        try? await Task.sleep(for: .seconds(3))
+                        if(!viewModel.showingAlert){
+                            viewModel.reset()
+                            dismiss()
+                            showOtpView = true
+                        }
+                        
                     }
                 }
                 .dissableWithOpacity(viewModel.data.isEmpty)

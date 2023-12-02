@@ -9,8 +9,10 @@ import SwiftUI
 
 struct ResetPwdView: View {
 
-    @State private var password = ""
-    @State private var confirmPwd = ""
+ 
+    @State private var errorMessage: String = ""
+    @State private var showingAlert = false
+    @ObservedObject var viewModel: ResetPwdViewModel
     @Environment(\.dismiss) private var dismiss
     var body: some View {
         ZStack {
@@ -36,14 +38,30 @@ struct ResetPwdView: View {
              
                 
                     
-                CustomTF(sfIcon: "lock", hint: "Password ",isPassword: true, value: $password).padding(.horizontal, 40).padding(.top, 20)
-                CustomTF(sfIcon: "lock", hint: "Confirm Password ",isPassword: true, value: $confirmPwd).padding(.horizontal, 40).padding(.top, 20)
+                CustomTF(sfIcon: "lock", hint: "Password ",isPassword: true, value: $viewModel.password).padding(.horizontal, 40).padding(.top, 20)
+                CustomTF(sfIcon: "lock", hint: "Confirm Password ",isPassword: true, value: $viewModel.confirmPassword).padding(.horizontal, 40).padding(.top, 20)
 
-                Button("Send") {
-                    // Login action
+                Button("Save") {
+                    if let userToken = UserDefaults.standard.string(forKey: "token") {
+                        viewModel.newPwd(userToken: userToken)
+
+                    }
+                   
+
+                    Task{
+                        
+                        try? await Task.sleep(for: .seconds(3))
+                        if(!viewModel.showingAlert){
+                            viewModel.reset()
+                            dismiss()
+                           
+                        }
+                        
+                    }
                   
                 }
-                .disabled(password.isEmpty || confirmPwd.isEmpty)
+                .disabled(viewModel.confirmPassword.isEmpty || viewModel.password.isEmpty)
+                .opacity((viewModel.confirmPassword.isEmpty || viewModel.password.isEmpty) ? 0.6 : 1)
                 .fontWeight(.bold)
                 .frame(maxWidth: 170)
                 .frame(maxHeight: 40)
@@ -54,7 +72,13 @@ struct ResetPwdView: View {
                 .padding(.horizontal, 40)
                 .padding(.top, 20)
                 
-                
+                .alert(isPresented: $viewModel.showingAlert) {
+                    Alert(
+                        title: Text("Error"),
+                        message: Text(viewModel.errorMessage),
+                        dismissButton: .default(Text("OK"))
+                    )
+                }
            
                 
            

@@ -64,9 +64,14 @@ struct OTPView: View {
 
                     }
                     Task{
-                        dismiss()
-                        try? await Task.sleep(for: .seconds(0))
-                        showResetView = true
+                        
+                        try? await Task.sleep(for: .seconds(3))
+                        if(!viewModel.showingAlert){
+                            viewModel.reset()
+                            dismiss()
+                            showResetView = true
+                        }
+                        
                     }
                 }
                 //.dissableWithOpacity(email.isEmpty)
