@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct AchievementsPage: View {
+    @ObservedObject  var profileViewModel: ProfileViewModel = ProfileViewModel()
+
     var body: some View {
         ScrollView {
             VStack(alignment: .leading, spacing: 10) {
@@ -17,12 +19,12 @@ struct AchievementsPage: View {
                         Circle()
                             .fill(Color.black)
                             .frame(width: 40, height: 37)
-                            .overlay(Text("2").foregroundColor(.white))
+                            .overlay(Text(profileViewModel.level).foregroundColor(.white))
 
                         VStack(alignment: .leading) {
-                            Text("Level 2")
+                            Text("Level \(profileViewModel.level)")
                                 .bold()
-                            Text("500 Points to next level")
+                            Text("\(profileViewModel.score) Points to next level")
                                 .foregroundColor(.gray)
                         }
                     }
@@ -68,14 +70,21 @@ struct AchievementsPage: View {
                 // Medals Layout
                 // Medals Section
                 HStack(spacing: 20) {
-                    MedalCard(medalType: "Gold", count: "20", color: "#EDB552")
-                    MedalCard(medalType: "Silver", count: "15", color: "#717484")
-                    MedalCard(medalType: "Bronze", count: "10", color: "#AA9083")
+                    MedalCard(medalType: "Gold", count: profileViewModel.goldMedal, color: "#EDB552")
+                    MedalCard(medalType: "Silver", count: profileViewModel.silverMedal, color: "#717484")
+                    MedalCard(medalType: "Bronze", count: profileViewModel.bronzeMedal, color: "#AA9083")
                 }
                 .padding(.horizontal, 20)
+                .padding(.bottom, 30)
 
 
               
+            }
+        }.onAppear {
+            if let userToken = UserDefaults.standard.string(forKey: "token") {
+                profileViewModel.fetchUserProfile(userToken: userToken)
+
+                print("token profile \(userToken)")
             }
         }
     }
@@ -140,6 +149,8 @@ struct MedalCard: View {
                 .foregroundColor(Color(hex: self.color))
                 .padding(5)
                 .background(Image(medalType.lowercased() + "_rect"))
+                .padding(.bottom, 5)
+
         }
         .frame(width: 100)
         .background(RoundedRectangle(cornerRadius: 20).fill(Color.white))

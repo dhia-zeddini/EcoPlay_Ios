@@ -14,6 +14,13 @@ class ProfileViewModel: ObservableObject {
     @Published  var lastName = ""
     @Published  var email = ""
     @Published  var phoneNumber = ""
+    @Published  var points = ""
+    @Published  var score = ""
+    @Published  var level = ""
+    @Published  var goldMedal = ""
+    @Published  var silverMedal = ""
+    @Published  var bronzeMedal = ""
+    
     
     @Published var showingAlert = false
     @Published var errorMessage = ""
@@ -42,6 +49,16 @@ class ProfileViewModel: ObservableObject {
                 self.lastName=user.lastName
                 self.email=user.email
                 self.phoneNumber=user.phoneNumber
+                
+                self.points=String(user.points)
+                self.score=String(user.score)
+                self.level=String(user.level)
+                self.goldMedal=String(user.goldMedal)
+                self.silverMedal=String(user.silverMedal)
+                self.bronzeMedal=String(user.bronzeMedal)
+                
+                
+                
                 
                 print(user)
             })
