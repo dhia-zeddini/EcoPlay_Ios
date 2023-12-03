@@ -30,6 +30,28 @@ class CartViewModel: ObservableObject {
             })
             .store(in: &cancellables)
     }
+    func deleteProductFromCart(productId: String, cartId: String) {
+        cartService.deleteProductFromCart(productId: productId, cartId: cartId)
+            .sink(receiveCompletion: { completion in
+                // Add debug statement here
+                print(completion)
+            }, receiveValue: { response in
+                // Add debug statement here
+                print(response)
+                // Refresh cart items here if needed
+            })
+            .store(in: &cancellables)
+    }
+    
+    func addProductToCart(productId: String, cartId: String) {
+        cartService.addToCart(productId: productId, cartId: cartId)
+            .sink(receiveCompletion: { completion in
+                // existing code
+            }, receiveValue: { response in
+                print("Response: \(response)")
+            })
+            .store(in: &cancellables)
+    }
 
 
 }

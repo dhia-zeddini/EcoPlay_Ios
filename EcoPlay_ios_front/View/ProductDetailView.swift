@@ -2,6 +2,8 @@ import SwiftUI
 
 struct ProductDetailView: View {
     var product: ProductModel
+    @StateObject private var cartViewModel = CartViewModel() // Initialize CartViewModel here
+      let cartId = "654567418bfbbff40a384edd"
 
     var createdAt: String
     var updatedAt: String
@@ -23,7 +25,7 @@ struct ProductDetailView: View {
                 .padding([.top], 40.0)
 
             Text(product.nameP)
-                .font(.headline)
+                .font(.title)
                 .fontWeight(.bold)
                 .foregroundColor(Color.green)
                 .padding([.top, .trailing], 20.0)
@@ -56,9 +58,9 @@ struct ProductDetailView: View {
 
             Spacer()
 
-            Button(action: {
-                print("button tapped")
-            }) {
+            Button(action: {               cartViewModel.addProductToCart(productId: product.id, cartId: cartId)
+
+                        }){
                 HStack {
                     ZStack {
                         Circle()
@@ -94,5 +96,6 @@ struct ProductDetailView_Previews: PreviewProvider {
         ProductDetailView(
             product: ProductModel(id: "1", nameP: "Sample Product", descriptionP: "Sample Description", image: "placeholder-image", priceP: "29.99", typeP: "Sample Type", createdAt: "SampleCreatedAt", updatedAt: "SampleUpdatedAt", __v: 1)
         )
+
     }
 }

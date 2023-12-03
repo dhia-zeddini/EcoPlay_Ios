@@ -35,8 +35,12 @@ struct CartService {
     func addToCart(productId: String, cartId: String) -> AnyPublisher<AddToCartResponse, Error> {
         let url = baseURL.appendingPathComponent("carts/adPtC")
         let request = createRequest(url: url, method: "PUT", body: ["productId": productId, "cartId": cartId])
+
         return URLSession.shared.dataTaskPublisher(for: request)
             .map(\.data)
+            .handleEvents(receiveOutput: { data in
+                print(String(data: data, encoding: .utf8) ?? "Invalid data")
+            })
             .decode(type: AddToCartResponse.self, decoder: JSONDecoder())
             .receive(on: DispatchQueue.main)
             .eraseToAnyPublisher()
