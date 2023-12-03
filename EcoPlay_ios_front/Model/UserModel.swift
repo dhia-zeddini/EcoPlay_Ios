@@ -21,7 +21,7 @@ struct UserModel: Codable {
     let goldMedal: Int
     let silverMedal: Int
     let bronzeMedal: Int
-    var owned: [String]  // Use Array instead of MutableList
+    //var owned: [String]  // Use Array instead of MutableList
     let etatDelete: Bool
     let createdAt: String
     let updatedAt: String
@@ -29,6 +29,6 @@ struct UserModel: Codable {
     
     
     enum CodingKeys: String, CodingKey {
-           case _id, firstName, lastName, email, phoneNumber, password, avatar, points, score, level, goldMedal, silverMedal, bronzeMedal, owned, etatDelete, createdAt, updatedAt, __v
+           case _id, firstName, lastName, email, phoneNumber, password, avatar, points, score, level, goldMedal, silverMedal, bronzeMedal, etatDelete, createdAt, updatedAt, __v
        }
 }

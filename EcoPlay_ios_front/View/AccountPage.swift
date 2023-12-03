@@ -2,9 +2,13 @@ import SwiftUI
 
 struct AccountPage: View {
     @ObservedObject  var profileViewModel: ProfileViewModel = ProfileViewModel()
+
+
     @State private var isEdit: Bool = false
     @State private var disabled: Bool = true
     @State private var showAlert: Bool = false
+   
+    @Environment(\.presentationMode) private var presentationMode
 
     var body: some View {
         ZStack {
@@ -16,13 +20,7 @@ struct AccountPage: View {
                     AccountDetails(isEdit: $isEdit, disabled: $disabled, showAlert: $showAlert, profileViewModel: profileViewModel)
                     Settings()
                     Security()
-                    Text("Delete Account")
-                        .font(.system(size: 20, weight: .bold))
-                        .foregroundColor(.red)
-                        .multilineTextAlignment(.leading)
-                        .padding(20)
-                        .frame(height: 42)
-                        .padding(.bottom, 20)
+                    
                 }
                 .padding(.leading, 0.0)
             }
@@ -34,25 +32,14 @@ struct AccountPage: View {
                 print("token profile \(userToken)")
             }
         }
+  
     }
     
     struct AccountDetails: View {
         @Binding var isEdit: Bool
         @Binding var disabled: Bool
         @Binding var showAlert: Bool
-//        @Binding var userModel : UserModel
-//        @State private var firstName = ""
-//        @State private var lastName = ""
-//        @State private var email = ""
-//        @State private var phoneNumber = ""
-        
         @ObservedObject  var profileViewModel: ProfileViewModel
- 
-//        init(userModel: UserModel ) {
-//             self.userModel = userModel
-//    //        self.profileViewModel.fetchUserProfile(userToken: UserDefaults.standard.string(forKey: "userToken") ?? "")
-//    //        print("token profileeee \(UserDefaults.standard.string(forKey: "token"))")
-//         }
         var body: some View {
             VStack {
                 HStack(spacing: 120) {
@@ -181,8 +168,10 @@ struct AccountPage: View {
     }
     
     struct Security: View {
-        @State private var isNotificationEnabled = false
+        @State private var showSignup: Bool = false
+        @State private var showSignIn: Bool = true
         @State private var password = ""
+        @ObservedObject var loginViewModel: LoginViewModel = LoginViewModel()
         var body: some View {
             VStack(alignment: .leading) {
                 
@@ -220,6 +209,23 @@ struct AccountPage: View {
                 .padding(.horizontal, 20)
                 .padding(.bottom, 10)
                 .shadow(radius: 5)
+                
+                Button("Logout"){
+                    UserDefaults.standard.removeObject(forKey: "token")
+                    print(showSignIn)
+                    NavigationLink(destination: ContentView()) {
+
+                         EmptyView()
+                     }.isDetailLink(false)
+                    
+                }
+                    .font(.system(size: 20, weight: .bold))
+                    .foregroundColor(.red)
+                    .multilineTextAlignment(.leading)
+                    .padding(20)
+                    .frame(height: 42)
+                    .padding(.bottom, 20)
+                  
             }
         }
     }

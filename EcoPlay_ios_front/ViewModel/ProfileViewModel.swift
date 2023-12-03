@@ -18,7 +18,7 @@ class ProfileViewModel: ObservableObject {
     @Published var showingAlert = false
     @Published var errorMessage = ""
     
-    @Published var userModel = UserModel(_id: "", firstName: "", lastName: "", email: "", phoneNumber: "", password: "", avatar: "", points: 0, score: 0, level: 0, goldMedal: 0, silverMedal: 0, bronzeMedal: 0, owned: [""], etatDelete: false, createdAt: "", updatedAt: "", __v: 0)
+    @Published var userModel = UserModel(_id: "", firstName: "", lastName: "", email: "", phoneNumber: "", password: "", avatar: "", points: 0, score: 0, level: 0, goldMedal: 0, silverMedal: 0, bronzeMedal: 0, etatDelete: false, createdAt: "", updatedAt: "", __v: 0)
     @Published var isLoading = false
 
     private var cancellables: Set<AnyCancellable> = []

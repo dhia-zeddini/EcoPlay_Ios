@@ -10,6 +10,9 @@ import SwiftUI
 struct ProfileView: View {
     @State private var selectedTab = 0
     @ObservedObject private var profileViewModel: ProfileViewModel = ProfileViewModel()
+    @State private var showSignup: Bool = false
+    @State private var showSignIn: Bool = true
+    @ObservedObject var loginViewModel: LoginViewModel = LoginViewModel()
 
     var body: some View {
         ZStack{
@@ -50,7 +53,16 @@ struct ProfileView: View {
                 }.padding(.top,10)
                 
                 
-            }
+            }      .navigationBarTitle("Account", displayMode: .inline)
+                .navigationBarItems(trailing: Button("Logout") {
+                    UserDefaults.standard.removeObject(forKey: "token")
+                    print("logout")
+                    //presentationMode.wrappedValue.dismiss()
+                    NavigationLink(destination: LoginView(viewModel: loginViewModel, showSignup: $showSignup), isActive: $showSignIn) {
+                    
+                                             EmptyView()
+                                         }.isDetailLink(false)
+                })
         }.navigationBarBackButtonHidden(true)
     }
  }
