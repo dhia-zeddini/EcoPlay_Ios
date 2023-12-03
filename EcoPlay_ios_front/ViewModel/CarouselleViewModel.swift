@@ -19,9 +19,9 @@ class CarouselleViewModel: ObservableObject {
                 case .failure(let error):
                     print("Error fetching products: \(error)")
                 }
-            }, receiveValue: { [weak self] products in
+            }, receiveValue: { products in
                 DispatchQueue.main.async {
-                    self?.products = products
+                    self.products = products
                 }
             })
             .store(in: &cancellables)

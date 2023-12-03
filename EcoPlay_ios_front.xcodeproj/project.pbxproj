@@ -23,6 +23,11 @@
 		E33212302B16852200F0CB19 /* CarouselleViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E332122F2B16852200F0CB19 /* CarouselleViewModel.swift */; };
 		E33212332B16856300F0CB19 /* CarouselleService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E33212322B16856300F0CB19 /* CarouselleService.swift */; };
 		E33212392B17FB3400F0CB19 /* ProductDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E33212382B17FB3400F0CB19 /* ProductDetailViewModel.swift */; };
+		E332123B2B1A2B0700F0CB19 /* CartModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E332123A2B1A2B0700F0CB19 /* CartModel.swift */; };
+		E332123D2B1A2EC600F0CB19 /* CartService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E332123C2B1A2EC600F0CB19 /* CartService.swift */; };
+		E332123F2B1A309E00F0CB19 /* CartRequestResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E332123E2B1A309E00F0CB19 /* CartRequestResponseModel.swift */; };
+		E33212412B1A352500F0CB19 /* CartViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E33212402B1A352500F0CB19 /* CartViewModel.swift */; };
+		E33212452B1CFD7400F0CB19 /* ImageViewFromURL.swift in Sources */ = {isa = PBXBuildFile; fileRef = E33212442B1CFD7400F0CB19 /* ImageViewFromURL.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -62,6 +67,11 @@
 		E332122F2B16852200F0CB19 /* CarouselleViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarouselleViewModel.swift; sourceTree = "<group>"; };
 		E33212322B16856300F0CB19 /* CarouselleService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarouselleService.swift; sourceTree = "<group>"; };
 		E33212382B17FB3400F0CB19 /* ProductDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductDetailViewModel.swift; sourceTree = "<group>"; };
+		E332123A2B1A2B0700F0CB19 /* CartModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartModel.swift; sourceTree = "<group>"; };
+		E332123C2B1A2EC600F0CB19 /* CartService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartService.swift; sourceTree = "<group>"; };
+		E332123E2B1A309E00F0CB19 /* CartRequestResponseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartRequestResponseModel.swift; sourceTree = "<group>"; };
+		E33212402B1A352500F0CB19 /* CartViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartViewModel.swift; sourceTree = "<group>"; };
+		E33212442B1CFD7400F0CB19 /* ImageViewFromURL.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageViewFromURL.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -165,6 +175,7 @@
 			children = (
 				E33212202B14F29700F0CB19 /* CarouselleItemView.swift */,
 				E33212262B1571B200F0CB19 /* CartItemView.swift */,
+				E33212442B1CFD7400F0CB19 /* ImageViewFromURL.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -173,6 +184,8 @@
 			isa = PBXGroup;
 			children = (
 				E332122B2B16819300F0CB19 /* ProductModel.swift */,
+				E332123A2B1A2B0700F0CB19 /* CartModel.swift */,
+				E332123E2B1A309E00F0CB19 /* CartRequestResponseModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -182,6 +195,7 @@
 			children = (
 				E332122F2B16852200F0CB19 /* CarouselleViewModel.swift */,
 				E33212382B17FB3400F0CB19 /* ProductDetailViewModel.swift */,
+				E33212402B1A352500F0CB19 /* CartViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -190,6 +204,7 @@
 			isa = PBXGroup;
 			children = (
 				E33212322B16856300F0CB19 /* CarouselleService.swift */,
+				E332123C2B1A2EC600F0CB19 /* CartService.swift */,
 			);
 			path = ApiService;
 			sourceTree = "<group>";
@@ -328,11 +343,16 @@
 				E33212292B1572E000F0CB19 /* CartView.swift in Sources */,
 				E33212332B16856300F0CB19 /* CarouselleService.swift in Sources */,
 				E33212252B15546200F0CB19 /* ProductDetailView.swift in Sources */,
+				E332123D2B1A2EC600F0CB19 /* CartService.swift in Sources */,
 				E33211F52B14E9F200F0CB19 /* ContentView.swift in Sources */,
+				E33212452B1CFD7400F0CB19 /* ImageViewFromURL.swift in Sources */,
+				E33212412B1A352500F0CB19 /* CartViewModel.swift in Sources */,
+				E332123F2B1A309E00F0CB19 /* CartRequestResponseModel.swift in Sources */,
 				E33212392B17FB3400F0CB19 /* ProductDetailViewModel.swift in Sources */,
 				E33212302B16852200F0CB19 /* CarouselleViewModel.swift in Sources */,
 				E33212272B1571B200F0CB19 /* CartItemView.swift in Sources */,
 				E33211F32B14E9F200F0CB19 /* EcoPlay_ios_frontApp.swift in Sources */,
+				E332123B2B1A2B0700F0CB19 /* CartModel.swift in Sources */,
 				E332121E2B14EC0300F0CB19 /* CarouselleView.swift in Sources */,
 				E332122C2B16819300F0CB19 /* ProductModel.swift in Sources */,
 			);

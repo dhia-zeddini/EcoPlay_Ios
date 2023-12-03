@@ -19,7 +19,7 @@ struct CarouselleView: View {
                         .padding([.bottom, .trailing], 30.0)
                         .frame(maxWidth: .infinity, alignment: .top)
 
-                    // Decorated Frame for "Avatar Collection" Text
+        
                     ZStack {
                         RoundedRectangle(cornerRadius: 15)
                             .fill(Color.white)

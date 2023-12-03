@@ -13,7 +13,7 @@ struct CarouselleItemView: View {
         VStack(alignment: .center, spacing: 8) {
             Spacer()
 
-            if let imageName = image, let imageUrl = URL(string: "https://ecoplay-api.onrender.com/images/product/\(imageName)") {
+            if let imageName = image, let imageUrl = URL(string: "http://192.168.87.207:8088/images/product/\(imageName)") {
                   if loadedImage != nil {
                       Image(uiImage: loadedImage!)
                           .resizable()
@@ -70,12 +70,15 @@ struct CarouselleItemView: View {
             if let error = error {
                 print("Error loading image: \(error.localizedDescription)")
             } else if let data = data {
-                loadedImage = UIImage(data: data)
-                print("Image loaded successfully")
+                if let uiImage = UIImage(data: data) {
+                    DispatchQueue.main.async {
+                        loadedImage = uiImage
+                    }
+                    print("Image loaded successfully")
+                }
             }
         }.resume()
-    }
-}
+    }}
 
 struct CarouselleItemView_Previews: PreviewProvider {
     static var previews: some View {

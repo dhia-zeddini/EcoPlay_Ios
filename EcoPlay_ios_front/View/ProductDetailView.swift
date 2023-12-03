@@ -3,6 +3,17 @@ import SwiftUI
 struct ProductDetailView: View {
     var product: ProductModel
 
+    var createdAt: String
+    var updatedAt: String
+    var __v: Int
+
+    init(product: ProductModel, createdAt: String = "", updatedAt: String = "", __v: Int = 0) {
+        self.product = product
+        self.createdAt = createdAt
+        self.updatedAt = updatedAt
+        self.__v = __v
+    }
+
     var body: some View {
         VStack(alignment: .center, spacing: 20) {
             Text("Product Details")
@@ -17,12 +28,8 @@ struct ProductDetailView: View {
                 .foregroundColor(Color.green)
                 .padding([.top, .trailing], 20.0)
 
-            Image(product.image)
-                .resizable()
-                .aspectRatio(contentMode: .fit)
-                .frame(width: 300, height: 300)
-                .padding(.top, 20.0)
-                .padding([.leading, .trailing], 20.0)
+            // Use ImageViewFromURL instead of Image
+            ImageViewFromURL(imageURL: URL(string: "http://192.168.87.207:8088/images/product/\(product.image)"))
 
             VStack {
                 Text(product.descriptionP)
@@ -83,10 +90,9 @@ struct ProductDetailView: View {
 
 struct ProductDetailView_Previews: PreviewProvider {
     static var previews: some View {
-        let sampleProduct = ProductModel(id: "1", nameP: "Sample Product", descriptionP: "Sample Description", priceP: "29.99", typeP: "Sample Type", image: "sample_image")
-        let viewModel = ProductDetailViewModel(product: sampleProduct)
-
-        return ProductDetailView(product: viewModel.product)
-            .environmentObject(viewModel)
+        // Provide values for createdAt, updatedAt, and __v
+        ProductDetailView(
+            product: ProductModel(id: "1", nameP: "Sample Product", descriptionP: "Sample Description", image: "placeholder-image", priceP: "29.99", typeP: "Sample Type", createdAt: "SampleCreatedAt", updatedAt: "SampleUpdatedAt", __v: 1)
+        )
     }
 }
