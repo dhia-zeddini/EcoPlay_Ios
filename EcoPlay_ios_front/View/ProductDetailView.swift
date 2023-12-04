@@ -3,6 +3,9 @@ import SwiftUI
 struct ProductDetailView: View {
     var product: ProductModel
     @StateObject private var cartViewModel = CartViewModel() // Initialize CartViewModel here
+    @State private var statusMessage: String?
+    @State private var showToast = false
+        @State private var toastMessage = ""
       let cartId = "654567418bfbbff40a384edd"
 
     var createdAt: String
@@ -58,9 +61,18 @@ struct ProductDetailView: View {
 
             Spacer()
 
-            Button(action: {               cartViewModel.addProductToCart(productId: product.id, cartId: cartId)
+            Button(action: {
+                cartViewModel.addProductToCart(productId: product.id, cartId: cartId) { success, message in
+                    // Set toast message based on the response
+                    toastMessage = message
+                    showToast = true
 
-                        }){
+                    // Optionally, hide the toast after a delay
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+                        showToast = false
+                    }
+                }
+            }) {
                 HStack {
                     ZStack {
                         Circle()
@@ -73,16 +85,19 @@ struct ProductDetailView: View {
                         .fontWeight(.semibold)
                         .foregroundColor(.white)
                 }
+                            
                 .padding()
                 .frame(maxWidth: .infinity)
                 .background(Color.black)
                 .cornerRadius(40)
             }
             .padding([.leading, .trailing], 40.0)
+            .toast(message: toastMessage, isShowing: showToast)
+
         }
         .frame(maxWidth: .infinity)
         .background(
-            Image("ecoPlay_bachground")
+            Image("backgrounddv")
                 .resizable()
                 .scaledToFill()
                 .edgesIgnoringSafeArea(.all)

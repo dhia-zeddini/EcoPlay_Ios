@@ -1,7 +1,7 @@
 import Foundation
 
 struct AddToCartResponse: Codable {
-    let status: String
+    var message: String
     // Add other properties based on your API response
 }
 

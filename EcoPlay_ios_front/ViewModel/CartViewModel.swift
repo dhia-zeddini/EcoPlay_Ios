@@ -43,15 +43,33 @@ class CartViewModel: ObservableObject {
             .store(in: &cancellables)
     }
     
-    func addProductToCart(productId: String, cartId: String) {
+    func addProductToCart(productId: String, cartId: String, completion: @escaping (Bool, String) -> Void) {
         cartService.addToCart(productId: productId, cartId: cartId)
-            .sink(receiveCompletion: { completion in
-                // existing code
+            .sink(receiveCompletion: { completionStatus in
+                switch completionStatus {
+                case .finished:
+                    // Handle normally if no errors
+                    break
+                case .failure(let error):
+                    // Handle error scenario
+                    print("Error adding product to cart: \(error)")
+                    completion(false, "Failed to add product")
+                }
             }, receiveValue: { response in
-                print("Response: \(response)")
+                // Here, inspect the response to determine the correct message
+                // Example:
+                if response.message.contains("already in cart") {
+                    completion(false, "Product already in cart")
+                } else {
+                    completion(true, "Product added successfully")
+                }
             })
             .store(in: &cancellables)
     }
-
+    func createPaymentIntent(totalC: Int, completion: @escaping (String) -> Void) {
+           // Implement the network call to your backend to create a payment intent
+           // The backend should return the client secret of the payment intent
+           // Call completion with the client secret
+       }
 
 }
