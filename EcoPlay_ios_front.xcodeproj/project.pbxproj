@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7E5A1B1C2B211ED5001570B4 /* UpdateAccountModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E5A1B1B2B211ED5001570B4 /* UpdateAccountModel.swift */; };
 		7E6452C22B13FCCD00D6945B /* ForgetPwdView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E6452C12B13FCCD00D6945B /* ForgetPwdView.swift */; };
 		7E6452C42B14111D00D6945B /* ResetPwdView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E6452C32B14111D00D6945B /* ResetPwdView.swift */; };
 		7E6452C62B1417C100D6945B /* OTPView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E6452C52B1417C100D6945B /* OTPView.swift */; };
@@ -35,6 +36,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		7E5A1B1B2B211ED5001570B4 /* UpdateAccountModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateAccountModel.swift; sourceTree = "<group>"; };
 		7E6452C12B13FCCD00D6945B /* ForgetPwdView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgetPwdView.swift; sourceTree = "<group>"; };
 		7E6452C32B14111D00D6945B /* ResetPwdView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResetPwdView.swift; sourceTree = "<group>"; };
 		7E6452C52B1417C100D6945B /* OTPView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OTPView.swift; sourceTree = "<group>"; };
@@ -80,6 +82,7 @@
 				7E6452CE2B1526B700D6945B /* LoginModel.swift */,
 				7E6452D82B167B9000D6945B /* UserModel.swift */,
 				7E6452DC2B167CDC00D6945B /* RegisterModel.swift */,
+				7E5A1B1B2B211ED5001570B4 /* UpdateAccountModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -244,6 +247,7 @@
 				7E6452CF2B1526B700D6945B /* LoginModel.swift in Sources */,
 				7EB4C1122B124C4900105DF4 /* EcoPlay_ios_front.xcdatamodeld in Sources */,
 				7E6452CA2B14F6B500D6945B /* AccountPage.swift in Sources */,
+				7E5A1B1C2B211ED5001570B4 /* UpdateAccountModel.swift in Sources */,
 				7E6452E32B17F61B00D6945B /* OTPViewModel.swift in Sources */,
 				7E6452D72B1527FA00D6945B /* LoginViewModel.swift in Sources */,
 				7E6452C42B14111D00D6945B /* ResetPwdView.swift in Sources */,
@@ -399,6 +403,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -428,6 +433,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

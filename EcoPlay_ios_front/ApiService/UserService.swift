@@ -11,7 +11,7 @@ import Combine
 
 struct UserService {
      func login(_ credentials: UserCredentials) -> AnyPublisher<LoginResponse, Error> {
-        let url = URL(string: "https://ecoplay-api.onrender.com/login")!
+        let url = URL(string: "http://localhost:9001/login")!
         
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
@@ -27,15 +27,49 @@ struct UserService {
     }
     
     
-    func register(_ registerRequestModel: RegisterRequestModel) -> AnyPublisher<RegisterResponse, Error> {
-       let url = URL(string: "https://ecoplay-api.onrender.com/registration")!
+    func register(_ registerRequestModel: RegisterRequestModel, boundary: String) -> AnyPublisher<RegisterResponse, Error> {
+       let url = URL(string: "http://localhost:9001/registration")!
        
        var request = URLRequest(url: url)
-       request.httpMethod = "POST"
-       request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+        request.httpMethod = "POST"
+          request.setValue("multipart/form-data; boundary=\(boundary)", forHTTPHeaderField: "Content-Type")
 
-       let encoder = JSONEncoder()
-       request.httpBody = try? encoder.encode(registerRequestModel)
+          var body = Data()
+
+          // Add text fields
+          body.append("--\(boundary)\r\n")
+          body.append("Content-Disposition: form-data; name=\"firstName\"\r\n\r\n")
+          body.append("\(registerRequestModel.firstName)\r\n")
+        
+        body.append("--\(boundary)\r\n")
+        body.append("Content-Disposition: form-data; name=\"lastName\"\r\n\r\n")
+        body.append("\(registerRequestModel.lastName)\r\n")
+        
+        body.append("--\(boundary)\r\n")
+        body.append("Content-Disposition: form-data; name=\"email\"\r\n\r\n")
+        body.append("\(registerRequestModel.email)\r\n")
+        
+        body.append("--\(boundary)\r\n")
+        body.append("Content-Disposition: form-data; name=\"phoneNumber\"\r\n\r\n")
+        body.append("\(registerRequestModel.phoneNumber)\r\n")
+        
+        body.append("--\(boundary)\r\n")
+        body.append("Content-Disposition: form-data; name=\"password\"\r\n\r\n")
+        body.append("\(registerRequestModel.password)\r\n")
+
+          // Repeat for other fields...
+
+          // Add the image data
+          if let imageData = registerRequestModel.avatar {
+              body.append("--\(boundary)\r\n")
+              body.append("Content-Disposition: form-data; name=\"avatar\"; filename=\"avatar.jpg\"\r\n")
+              body.append("Content-Type: image/jpeg\r\n\r\n")
+              body.append(imageData)
+              body.append("\r\n")
+          }
+
+          body.append("--\(boundary)--\r\n")
+          request.httpBody = body
 
        return URLSession.shared.dataTaskPublisher(for: request)
            .map(\.data)
@@ -46,7 +80,7 @@ struct UserService {
     
         func getUserProfile(userToken: String) -> AnyPublisher<UserModel, Error> {
             
-            let userProfileURL = URL(string: "https://ecoplay-api.onrender.com/user/profile")!
+            let userProfileURL = URL(string: "http://localhost:9001/user/profile")!
 
             var request = URLRequest(url: userProfileURL)
             request.httpMethod = "GET"
@@ -65,8 +99,8 @@ struct UserService {
         }
     
     
-    func editAccount(_ registerRequestModel: RegisterRequestModel,userToken: String) -> AnyPublisher<UpdateAccountResponse, Error> {
-       let url = URL(string: "https://ecoplay-api.onrender.com/user")!
+    func editAccount(_ registerRequestModel: UpdateAccountModel,userToken: String) -> AnyPublisher<UpdateAccountResponse, Error> {
+       let url = URL(string: "http://localhost:9001/user")!
        
        var request = URLRequest(url: url)
        request.httpMethod = "PUT"
@@ -83,7 +117,7 @@ struct UserService {
    }
     
     func forgetPwd(_ credentials: UserCredentials) -> AnyPublisher<ForgetPwdResponse, Error> {
-       let url = URL(string: "https://ecoplay-api.onrender.com/forgetPwd")!
+       let url = URL(string: "http://localhost:9001/forgetPwd")!
        
        var request = URLRequest(url: url)
        request.httpMethod = "POST"
@@ -115,7 +149,7 @@ struct UserService {
    }
     
     func newPwd(_ credentials: UserCredentials,userToken: String) -> AnyPublisher<LoginResponse, Error> {
-       let url = URL(string: "https://ecoplay-api.onrender.com/newPwd")!
+       let url = URL(string: "http://localhost:9001/newPwd")!
        
        var request = URLRequest(url: url)
        request.httpMethod = "POST"
@@ -130,4 +164,11 @@ struct UserService {
            .decode(type: LoginResponse.self, decoder: JSONDecoder())
            .eraseToAnyPublisher()
    }
+}
+extension Data {
+    mutating func append(_ string: String) {
+        if let data = string.data(using: .utf8) {
+            append(data)
+        }
+    }
 }

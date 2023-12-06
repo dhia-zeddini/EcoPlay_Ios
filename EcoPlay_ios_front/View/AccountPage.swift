@@ -211,13 +211,13 @@ struct AccountPage: View {
                 .shadow(radius: 5)
                 
                 Button("Logout"){
-                    UserDefaults.standard.removeObject(forKey: "token")
+                    //UserDefaults.standard.removeObject(forKey: "token")
                     print(showSignIn)
-                    NavigationLink(destination: ContentView()) {
+                    
+                    NavigationLink(destination: ContentView(),isActive: $showSignIn) {
 
                          EmptyView()
                      }.isDetailLink(false)
-                    
                 }
                     .font(.system(size: 20, weight: .bold))
                     .foregroundColor(.red)
@@ -225,6 +225,7 @@ struct AccountPage: View {
                     .padding(20)
                     .frame(height: 42)
                     .padding(.bottom, 20)
+                   
                   
             }
         }

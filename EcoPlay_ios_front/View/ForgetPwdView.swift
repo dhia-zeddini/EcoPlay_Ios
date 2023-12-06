@@ -7,6 +7,7 @@
 
 import SwiftUI
 
+@available(iOS 15.0, *)
 struct ForgetPwdView: View {
     @Binding var showOtpView: Bool
     @State private var showForgetPwdView: Bool = false
@@ -17,6 +18,7 @@ struct ForgetPwdView: View {
     @ObservedObject var viewModel: ForgetPwdViewModel
     
     @Environment(\.dismiss) private var dismiss
+    @available(iOS 16.0, *)
     var body: some View {
         ZStack {
             Image("ecoPlay_background") // Make sure to replace "eco_play_background" with your actual image name

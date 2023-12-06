@@ -19,11 +19,25 @@ struct ProfileView: View {
           
             NavigationView {
                 VStack {
-                    Image("img5")
-                        .resizable()
-                        .cornerRadius(50)
-                        .frame(width: 80,height: 80)
 
+                    AsyncImage(url: profileViewModel.imageUrl) { phase in
+                             switch phase {
+                             case .empty:
+                                 ProgressView()
+                             case .success(let image):
+                                 image
+                                     .resizable()
+                                     .cornerRadius(50)
+                                     .frame(width: 80,height: 80)
+                             case .failure:
+                                 Image(systemName: "photo")
+                                     .resizable()
+                                     .scaledToFit()
+                                     .foregroundColor(.red)
+                             @unknown default:
+                                 EmptyView()
+                             }
+                         }
                     
                     Text("Profile")
                         .fontWeight(.bold)
@@ -53,17 +67,9 @@ struct ProfileView: View {
                 }.padding(.top,10)
                 
                 
-            }      .navigationBarTitle("Account", displayMode: .inline)
-                .navigationBarItems(trailing: Button("Logout") {
-                    UserDefaults.standard.removeObject(forKey: "token")
-                    print("logout")
-                    //presentationMode.wrappedValue.dismiss()
-                    NavigationLink(destination: LoginView(viewModel: loginViewModel, showSignup: $showSignup), isActive: $showSignIn) {
-                    
-                                             EmptyView()
-                                         }.isDetailLink(false)
-                })
+            }   
         }.navigationBarBackButtonHidden(true)
+          
     }
  }
 
@@ -90,3 +96,5 @@ struct ProfileView_Previews: PreviewProvider {
         ProfileView()
     }
 }
+
+

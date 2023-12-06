@@ -16,7 +16,7 @@ class RegisterViewModel: ObservableObject {
     @Published var phoneNumber = ""
     @Published var password = ""
     @Published var confirmPassword = ""
-    @Published var avatar = ""
+    @Published var avatar = UIImage()
     @Published var showSignIn = false
     @Published var showSignup = false
     @Published var showingAlert = false
@@ -34,17 +34,24 @@ class RegisterViewModel: ObservableObject {
              showingAlert = true
              return
          }
-
+       
+         guard let imageData = avatar.jpegData(compressionQuality: 1) else {
+                  errorMessage = "Failed to convert image to data"
+                  showingAlert = true
+                  return
+              }
+         
+         print("img: \(imageData)")
          let registerRequestModel = RegisterRequestModel(
              firstName: firstName,
              lastName: lastName,
              email: email,
              phoneNumber: phoneNumber,
              password: password,
-             avatar: avatar
+             avatar: imageData
          )
-        
-        apiService.register(registerRequestModel)
+         let boundary = "Boundary-\(UUID().uuidString)"
+        apiService.register(registerRequestModel, boundary: boundary)
            // .receive(on: DispatchQueue.main)
             .sink(receiveCompletion: { completion in
                 switch completion {
@@ -78,7 +85,7 @@ class RegisterViewModel: ObservableObject {
         phoneNumber = ""
         password = ""
         confirmPassword = ""
-        avatar = ""
+        avatar = UIImage()
         //showSignIn=false
     }
 }

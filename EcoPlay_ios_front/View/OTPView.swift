@@ -7,6 +7,7 @@
 
 import SwiftUI
 
+@available(iOS 15.0, *)
 struct OTPView: View {
     @Binding var showResetView: Bool
     @FocusState private var isKeyBoardShowing: Bool
@@ -15,6 +16,7 @@ struct OTPView: View {
     @State private var showingAlert = false
     @ObservedObject var viewModel: OTPViewModel
     @Environment(\.dismiss) private var dismiss
+    @available(iOS 16.0, *)
     var body: some View {
         ZStack {
             Image("ecoPlay_background") // Make sure to replace "eco_play_background" with your actual image name

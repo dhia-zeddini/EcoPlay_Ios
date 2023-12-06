@@ -13,8 +13,15 @@ struct EcoPlay_ios_frontApp: App {
 
     var body: some Scene {
         WindowGroup {
-            ContentView()
+        if let token = UserDefaults.standard.string(forKey: "token"), !token.isEmpty {
+                    // Token is not empty, user is logged in, show ProfileView
+                    ProfileView()
                 .environment(\.managedObjectContext, persistenceController.container.viewContext)
+        } else {
+            
+                ContentView()
+                    .environment(\.managedObjectContext, persistenceController.container.viewContext)
+            }
         }
     }
 }

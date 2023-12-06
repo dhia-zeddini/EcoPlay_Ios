@@ -15,6 +15,7 @@ struct UserModel: Codable {
     let phoneNumber: String
     let password: String
     let avatar: String
+    let role: String
     let points: Int
     let score: Int
     let level: Int
@@ -29,6 +30,6 @@ struct UserModel: Codable {
     
     
     enum CodingKeys: String, CodingKey {
-           case _id, firstName, lastName, email, phoneNumber, password, avatar, points, score, level, goldMedal, silverMedal, bronzeMedal, etatDelete, createdAt, updatedAt, __v
+           case _id, firstName, lastName, email, phoneNumber, password, avatar,role, points, score, level, goldMedal, silverMedal, bronzeMedal, etatDelete, createdAt, updatedAt, __v
        }
 }

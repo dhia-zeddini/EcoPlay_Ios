@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import UIKit
 
 struct RegisterRequestModel: Codable {
     let firstName: String
@@ -13,7 +14,7 @@ struct RegisterRequestModel: Codable {
     let email: String
     let phoneNumber: String
     let password: String
-    let avatar: String
+    let avatar: Data?
     
 }
 struct RegisterResponse: Decodable {

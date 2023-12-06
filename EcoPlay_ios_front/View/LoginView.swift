@@ -25,6 +25,10 @@ struct LoginView: View {
     init(viewModel: LoginViewModel, showSignup: Binding<Bool>) {
          self.viewModel = viewModel
          self._showSignup = showSignup
+        print("tokeennnn: \(UserDefaults.standard.string(forKey: "token"))")
+        
+        
+
      }
     var body: some View {
         ZStack {
@@ -125,7 +129,7 @@ struct LoginView: View {
                 .padding(.bottom, 20)
             }
             .padding(.top, 150)
-        }
+        }.navigationBarBackButtonHidden(true)
         //.padding(.top, 1)
         .sheet(isPresented: $showForgetPwdView, content: {
             ForgetPwdView(showOtpView: $showOtpView, viewModel: forgetPwdViewModel)

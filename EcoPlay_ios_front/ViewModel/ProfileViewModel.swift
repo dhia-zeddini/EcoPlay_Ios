@@ -20,12 +20,14 @@ class ProfileViewModel: ObservableObject {
     @Published  var goldMedal = ""
     @Published  var silverMedal = ""
     @Published  var bronzeMedal = ""
+    @Published  var avatarUrl = ""
+    @Published  var imageUrl = URL(string: "http://localhost:9001/images/avatars/defaultAvatar.png")!
     
     
     @Published var showingAlert = false
     @Published var errorMessage = ""
     
-    @Published var userModel = UserModel(_id: "", firstName: "", lastName: "", email: "", phoneNumber: "", password: "", avatar: "", points: 0, score: 0, level: 0, goldMedal: 0, silverMedal: 0, bronzeMedal: 0, etatDelete: false, createdAt: "", updatedAt: "", __v: 0)
+    @Published var userModel = UserModel(_id: "", firstName: "", lastName: "", email: "", phoneNumber: "", password: "", avatar: "", role: "",points: 0, score: 0, level: 0, goldMedal: 0, silverMedal: 0, bronzeMedal: 0, etatDelete: false, createdAt: "", updatedAt: "", __v: 0)
     @Published var isLoading = false
 
     private var cancellables: Set<AnyCancellable> = []
@@ -49,7 +51,8 @@ class ProfileViewModel: ObservableObject {
                 self.lastName=user.lastName
                 self.email=user.email
                 self.phoneNumber=user.phoneNumber
-                
+                self.avatarUrl="http://localhost:9001/images/avatars/\(user.avatar)"
+                self.imageUrl = URL(string: self.avatarUrl)!
                 self.points=String(user.points)
                 self.score=String(user.score)
                 self.level=String(user.level)
@@ -66,10 +69,10 @@ class ProfileViewModel: ObservableObject {
     }
     
     
-    func updateAccountUser(userToken: String) {
+   func updateAccountUser(userToken: String) {
       
 
-        let registerRequestModel = RegisterRequestModel(
+          let registerRequestModel = UpdateAccountModel(
             firstName: firstName,
             lastName: lastName,
             email: email,
